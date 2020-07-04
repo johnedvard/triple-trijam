@@ -1,0 +1,21 @@
+{
+  "name": "phaser-circle-puzzle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^1.12.3",
+    "phaser": "^3.23.0"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "typescript": "^3.9.6"
+  }
+}
