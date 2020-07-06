@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@excaliburjs/excalibur-tiled": "^2.3.1",
     "excalibur": "^0.24.3",
     "parcel": "^1.12.3"
   },

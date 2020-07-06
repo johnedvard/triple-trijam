@@ -7,6 +7,7 @@ import {
   Color,
   PreCollisionEvent,
 } from 'excalibur';
+import { GameMap } from './gameMap';
 export class Player extends Actor {
   isDrawCircle = false;
   isDrawArrow = false;
@@ -17,6 +18,7 @@ export class Player extends Actor {
   pointer: Actor;
   leftKey: Input.Keys;
   rightKey: Input.Keys;
+  accel = 0.02;
   constructor(
     x: number,
     y: number,
@@ -24,11 +26,17 @@ export class Player extends Actor {
     rightKey: Input.Keys,
     color: Color
   ) {
-    super({ x: x, y: y, width: 10, height: 10, color: color });
+    super({
+      x: x,
+      y: y,
+      width: 10,
+      height: 10,
+      color: color,
+      vel: new Vector(1, 0),
+    });
     this.leftKey = leftKey;
     this.rightKey = rightKey;
-    this.body.collider.type = CollisionType.Passive;
-    this.vel = new Vector(0, 1);
+    this.body.collider.type = CollisionType.Active;
     this.pointer = new Actor({
       x: this.pos.x,
       y: this.pos.y,
@@ -44,7 +52,6 @@ export class Player extends Actor {
       this.vel = new Vector(this.vel.x * -1, this.vel.y * -1);
       this.rotation = this.rotation + 3.14;
     }
-    console.log('args', args);
   };
 
   public update(engine: Engine, dt: number) {
@@ -57,6 +64,7 @@ export class Player extends Actor {
         dt,
         engine.input.keyboard.isHeld(this.leftKey)
       );
+      this.vel = this.vel.normalize();
     } else {
       if (this.isChangingDirection) {
         this.vel = this.vel.rotate(this.rotateRadians);
